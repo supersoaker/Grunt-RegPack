@@ -16,7 +16,8 @@ module.exports = function(grunt) {
   grunt.registerMultiTask('regpack', 'A grunt module for minifying javascript files better than UglifyJs', function() {
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
-      globalVariables: ''
+        globalVariables: '',
+	    separator: ''
     });
 
     // Iterate over all specified file groups.
@@ -34,10 +35,9 @@ module.exports = function(grunt) {
       }).map(function(filepath) {
         // Read file source.
         return grunt.file.read(filepath);
-      }).join("");
+      }).join(options.separator);
 
       // Write the destination file.
-
       grunt.file.write(file.dest, packer(src, options.globalVariables, '' ));
 
       // Print a success message.

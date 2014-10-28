@@ -1,6 +1,7 @@
 # grunt-regpack
 
 > A grunt module for minifying javascript files better than UglifyJs
+> Based on the packer from https://github.com/Siorki/RegPack
 
 ## Getting Started
 This plugin requires Grunt `~0.4.5`
@@ -25,65 +26,71 @@ In your project's Gruntfile, add a section named `regpack` to the data object pa
 ```js
 grunt.initConfig({
   regpack: {
-    options: {
-      // Task-specific options go here.
-    },
-    your_target: {
-      // Target-specific file lists and/or options go here.
-    },
-  },
+    firstTask: {
+	    options: {
+	      globalVariables: '',
+	      separator: ''
+	    },
+	    files: [
+	        {
+	            src: [
+	                'test/fwTest/frameWreck.js',
+	                'test/fwTest/fw-css.js',
+	                'test/fwTest/fw-data.js',
+	                'test/fwTest/fw-dom.js'
+	            ],
+	            dest: "test/fw-min.js"
+	        }
+	    ]
+	  }
 });
 ```
 
 ### Options
 
+#### options.globalVariables
+Type: `String`
+Default value: `''`
+Example: `'jQuery Angular AnotherFramework'`
+
+A string value that is used to do define the variables which must not be modified.
+
 #### options.separator
 Type: `String`
-Default value: `',  '`
+Default value: `''`
+Example: `';'`
 
-A string value that is used to do something with whatever.
-
-#### options.punctuation
-Type: `String`
-Default value: `'.'`
-
-A string value that is used to do something else with whatever else.
+A string value that is used separate the source files.
 
 ### Usage Examples
 
-#### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
-
-```js
-grunt.initConfig({
-  regpack: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-});
-```
-
 #### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
+In this example, the files in that source array are going to be packed into the destination file "test/fw-min.js".
+You can run each specific task with `grunt regpack:{{taskName}}`, in this example with `grunt regpack:firstTask`.
 
 ```js
 grunt.initConfig({
   regpack: {
-    options: {
-      separator: ': ',
-      punctuation: ' !!!',
-    },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
+    firstTask: {
+	    options: {
+	      globalVariables: ''
+	      separator: ''
+	    },
+	    files: [
+	        {
+	            src: [
+	                'test/fwTest/frameWreck.js',
+	                'test/fwTest/fw-css.js',
+	                'test/fwTest/fw-data.js',
+	                'test/fwTest/fw-dom.js'
+	            ],
+	            dest: "test/fw-min.js"
+	        }
+	    ]
+	  }
 });
 ```
 
-## Contributing
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
 _(Nothing yet)_
