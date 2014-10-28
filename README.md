@@ -1,7 +1,6 @@
 # grunt-regpack
 
 > A grunt module for minifying javascript files better than UglifyJs.
-
 > Based on the packer from https://github.com/Siorki/RegPack
 
 ## Getting Started
